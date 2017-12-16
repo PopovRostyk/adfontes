@@ -28,26 +28,54 @@ def initialize_shadow(mach_number, alltime_procces):
     return lst
 
 
-def update(jobs, tg, S, delay):
-    #chrms = generate(len(job_1))
-    #prioritetes = get_priority(chrms)
-    #buffer = list()
-    #delays = list()
-    #prior_job = int()
-    #jobs_index = list(jobs.keys())
-    #print(jobs_index)
-    #priority_lst = list()
-    #for i in range(len(jobs_index)):
-    #    delays.append(get_delay(chrms, jobs.get(i+1)[1], i))
-    correct_jobs = list()
+def update(jobs):
+    chrms = generate(len(job_1))
+    prioritetes = get_priority(chrms)
+    buffer = list()
+    delays = list()
+    prior_job = int()
+    jobs_index = list(jobs.keys())
+    print(jobs_index)
+    priority_lst = list()
+    for i in range(len(jobs_index)):
+        delays.append(get_delay(chrms, jobs.get(i+1)[1], i))
     for items in jobs:
-        if items not in S and jobs.get(items)[[1]] <= tg + delay:
-            correct_jobs.append(items)
-    return correct_jobs
+        if jobs.get(items)[2] == 1:
+            buffer.append(items)
+    return buffer
+
+update(job_1)
+
+
 
 
 def genetic(job, prioriteetes, machines, delays):
-    
+    chrms = generate(len(job_1))
+    tg = [0]
+    prior_lst = list()
+    operation_sequences = []
+    for items in job.values():
+        operation_sequences.append(items[2])
+    max_sequence = max(operation_sequences)
+    jobs_index = list(job.keys())
+    for i in range(len(jobs_index)):
+        delays.append(get_delay(chrms, job.get(i+1)[1], i))
+    buffer = update(job)
+    while job != {}:
+        for items in buffer:
+            prior_lst.append(prioritetes[items - 1])
+        num_job = prioritetes.index(max(prioritetes))
+        prior_lst.clear()
+        if num_job <= tg[0] + delays[num_job - 1]:
+            try:
+                machines[job.get(num_job)[0]] = job.get(num_job)[1]
+                job.pop(num_job)
+                buffer.remove(num_job)
+                buffer.append(num_job + max_sequence)
+            except KeyError:
+                continue
+
+
 
 
 
