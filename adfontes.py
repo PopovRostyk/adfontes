@@ -28,36 +28,28 @@ def initialize_shadow(mach_number, alltime_procces):
     return lst
 
 
-def update(jobs, tg, S, delay, machine_num):
-    chrms = generate(len(job_1))
-    prioritetes = get_priority(chrms)
-    buffer = list()
-    delays = list()
-    prior_job = int()
+def update(jobs, tg, S, delay):
+    #chrms = generate(len(job_1))
+    #prioritetes = get_priority(chrms)
+    #buffer = list()
+    #delays = list()
+    #prior_job = int()
+    #jobs_index = list(jobs.keys())
+    #print(jobs_index)
+    #priority_lst = list()
+    #for i in range(len(jobs_index)):
+    #    delays.append(get_delay(chrms, jobs.get(i+1)[1], i))
+    correct_jobs = list()
+    for items in jobs:
+        if items not in S and jobs.get(items)[[1]] <= tg + delay:
+            correct_jobs.append(items)
+    return correct_jobs
+
+
+def genetic(job, prioriteetes, machines, delays):
     
-    all_procceses_time = 0
-    i = machine_num
-    jobs_index = list(jobs.keys())
-    print(jobs_index)
-    it = 0
-    for i in range(len(jobs_index)):
-        delays.append(get_delay(chrms, jobs.get(i+1)[1], i))
-        if jobs.get(jobs_index[i])[2] == 1:
-            buffer.append(jobs_index[i])
-    print(delays)
-    print(buffer)
-    for items in buffer:
 
 
-
-
-update(job_1, 0, 0, 0, 0)
-
-
-
-
-def genetic(job, prioriteetes, machines):
-    pass
 
 a = {1:[1, 2, 3], 2:[2, 2, 2], 3:[3, 2, 3], 4:[5, 2, 3]}
 #print(max(a.values(), key=lambda x:x[0]))
